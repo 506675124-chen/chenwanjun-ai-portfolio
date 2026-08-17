@@ -169,17 +169,22 @@
   }
 </style>
 
-  /* 对内编辑工具条（仅编辑版显示，对外版不含） */
-  #editbar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#1f2a44;color:#fff;display:flex;gap:10px;align-items:center;padding:10px 16px;font-size:13px;box-shadow:0 -2px 12px rgba(0,0,0,.18);flex-wrap:wrap}
-  .eb-btn{background:#0f9b8e;color:#fff;border:none;padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
-  .eb-btn:hover{background:#0c8276}
-  .eb-btn.primary{background:#c79a3a}
-  .eb-btn.primary:hover{background:#b0882f}
-  .eb-title{font-weight:600;margin-right:4px}
-  .eb-status{margin-left:auto;color:#bcd4e6;font-size:12px}
-  body{padding-bottom:64px}
-
-</head>
+  /* 对内编辑工具条：右下角悬浮小圆点，默认极简，点击展开 */
+  #editbar{position:fixed;right:20px;bottom:20px;z-index:50;font-family:inherit}
+  .eb-fab{width:44px;height:44px;border-radius:50%;background:rgba(31,42,68,.82);color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.18);backdrop-filter:blur(6px);transition:transform .15s,background .15s}
+  .eb-fab:hover{transform:scale(1.08);background:rgba(31,42,68,.95)}
+  .eb-panel{position:absolute;right:0;bottom:58px;width:240px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.14);padding:14px;display:none;flex-direction:column;gap:10px}
+  .eb-panel.open{display:flex}
+  .eb-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;color:var(--muted)}
+  .eb-head button{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;padding:0 2px}
+  .eb-head button:hover{color:var(--navy)}
+  .eb-btns{display:flex;flex-wrap:wrap;gap:8px}
+  .eb-btn{background:#f6f8fb;color:var(--navy);border:1px solid var(--line);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:background .12s}
+  .eb-btn:hover{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}
+  .eb-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .eb-btn.primary:hover{background:#0c8276}
+  .eb-status{color:var(--muted);font-size:11px;text-align:center;padding-top:4px}
+  </head>
 <body>
 
 <!-- ============ 顶部导航 ============ -->
@@ -196,6 +201,19 @@
     <a href="#external">对外链接</a>
   </div>
 </nav>
+
+<div class="eb-btns">
+      <button id="btnEdit" class="eb-btn primary">编辑</button>
+      <button id="btnSave" class="eb-btn">保存草稿</button>
+      <button id="btnRestore" class="eb-btn">恢复草稿</button>
+      <button id="btnExport" class="eb-btn">导出 HTML</button>
+      <button id="btnPreview" class="eb-btn">预览</button>
+    </div>
+    <div id="ebStatus" class="eb-status">预览模式</div>
+  </div>
+  <button class="eb-fab" id="ebFab" title="对内编辑">✏️</button>
+</div>
+
 
 <!-- ============ Hero / 自我介绍（可编辑） ============ -->
 <header class="hero">
