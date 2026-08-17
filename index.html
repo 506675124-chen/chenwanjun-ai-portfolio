@@ -120,7 +120,9 @@
 
   .metric-inline{display:inline-block;background:var(--teal-soft);color:var(--teal);font-weight:700;border-radius:6px;padding:1px 8px;font-size:13.5px;margin:0 2px}
   .metric-warn{display:inline-block;background:var(--red-soft);color:var(--red);font-weight:700;border-radius:6px;padding:1px 8px;font-size:13.5px;margin:0 2px}
-  .shot{margin-top:18px;border:1.5px dashed #cdd6e2;border-radius:10px;padding:18px;text-align:center;color:var(--muted);font-size:13px;background:#fbfcfd}
+  .shot{margin-top:18px;border:1.5px dashed #cdd6e2;border-radius:10px;padding:18px;text-align:center;color:var(--muted);font-size:13px;background:#fbfcfd;position:relative;min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;overflow:hidden}
+  .shot img,.shot video{max-width:100%;height:auto;border-radius:8px;display:block}
+  .shot.has-media{border-style:solid;background:#fff;padding:10px}
 
   /* 竞品对比 */
   .compare{width:100%;border-collapse:collapse;font-size:14px;margin:24px 0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
@@ -500,27 +502,27 @@
   <div class="wrap">
     <div class="eyebrow">Capability Map</div>
     <h2>能力地图</h2>
-    <p class="sub">我做过的事 → 对应的 AI 能力 → 可投递岗位 → 证据项目。</p>
+    <p class="sub">我做过的事 → 对应的 AI 能力 → 参考项目。</p>
     <div class="cap-grid">
       <div class="cap-row">
         <div><span class="h">我做过的事</span><span class="v">搭建含 11,284 条结构化学位数据的院校库，定义字段规范与可信来源标准</span></div>
         <div><span class="h">对应 AI 能力</span><div><span class="cap-tag">知识工程</span><span class="cap-tag">RAG 知识库</span><span class="cap-tag">信源治理</span></div></div>
-        <div><span class="h">可投递岗位 · 证据项目</span><span class="v">AI 知识库 / RAG 产品设计师 ｜ 项目②院校库</span></div>
+        <div><span class="h">参考项目</span><span class="v">项目②院校库</span></div>
       </div>
       <div class="cap-row">
         <div><span class="h">我做过的事</span><span class="v">用自然语言指令驱动 AI 完成建档、选校、规划生成等流程自动化</span></div>
         <div><span class="h">对应 AI 能力</span><div><span class="cap-tag">Agent 设计</span><span class="cap-tag">工作流编排</span><span class="cap-tag">用例设计</span></div></div>
-        <div><span class="h">可投递岗位 · 证据项目</span><span class="v">Agent 产品运营 / 设计师 ｜ 项目①AI 工作台</span></div>
+        <div><span class="h">参考项目</span><span class="v">项目①AI 工作台</span></div>
       </div>
       <div class="cap-row">
         <div><span class="h">我做过的事</span><span class="v">留学全周期 client-facing，把学生诉求拆成可执行方案并持续跟进</span></div>
         <div><span class="h">对应 AI 能力</span><div><span class="cap-tag">需求拆解</span><span class="cap-tag">业务匹配</span><span class="cap-tag">客户成功</span></div></div>
-        <div><span class="h">可投递岗位 · 证据项目</span><span class="v">AI Business Analyst / Solutions Consultant ｜ 项目①③ + 业务底盘</span></div>
+        <div><span class="h">参考项目</span><span class="v">项目①AI 工作台、项目③四年规划生成器 + 业务底盘</span></div>
       </div>
       <div class="cap-row">
         <div><span class="h">我做过的事</span><span class="v">用 Python / SQL 清洗数据、用指标管理顾问团队与学生进度</span></div>
         <div><span class="h">对应 AI 能力</span><div><span class="cap-tag">数据驱动</span><span class="cap-tag">效果评测</span><span class="cap-tag">验收意识</span></div></div>
-        <div><span class="h">可投递岗位 · 证据项目</span><span class="v">AI 产品运营（数据侧）｜ 项目②部署 v9 + 自设验收</span></div>
+        <div><span class="h">参考项目</span><span class="v">项目②部署 v9 + 自设验收</span></div>
       </div>
     </div>
   </div>
@@ -549,7 +551,7 @@
 
 
 <footer>
-  <div class="wrap">© 陈婉君 · AI 产品作品集 · 对外发布版本，内容不可编辑</div>
+  <div class="wrap">© 陈婉君 · AI 产品作品集</div>
 </footer>
 
 
