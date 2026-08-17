@@ -27,11 +27,6 @@
     color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;
   }
   a{color:var(--teal);text-decoration:none}
-  /* 可编辑区块：平时干净，点击编辑时显示虚线提示 */
-  []{transition:outline .15s}
-  []:hover{outline:1px dashed #cfd8e3;outline-offset:6px;border-radius:6px}
-  []:focus{outline:2px dashed var(--teal);outline-offset:6px;border-radius:6px;background:#fcfffe}
-
   /* 顶部导航 */
   nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
@@ -186,18 +181,6 @@
     <a href="#external">对外链接</a>
   </div>
 </nav>
-
-<div class="eb-btns">
-      <button id="btnEdit" class="eb-btn primary">编辑</button>
-      <button id="btnSave" class="eb-btn">保存草稿</button>
-      <button id="btnRestore" class="eb-btn">恢复草稿</button>
-      <button id="btnExport" class="eb-btn">导出 HTML</button>
-      <button id="btnPreview" class="eb-btn">预览</button>
-    </div>
-    <div id="ebStatus" class="eb-status">预览模式</div>
-  </div>
-  <button class="eb-fab" id="ebFab" title="对内编辑">✏️</button>
-</div>
 
 
 <!-- ============ Hero / 自我介绍（可编辑） ============ -->
@@ -476,40 +459,6 @@
       </div>
       <div class="shot">📷 截图位：生成器输入输出示例 / 规划表截图</div>
     </div>
-
-    <!-- 项目四：营养学信息源导航 -->
-    <div class="proj">
-      <div class="proj-header">
-        <div class="idx">4</div>
-        <div>
-          <h3>营养学信息源导航</h3>
-          <div class="tags"><span>信源分级</span><span>知识导航</span><span>RAG 喂料</span><span>跨域迁移</span></div>
-        </div>
-      </div>
-      <div class="story">
-        <div class="story-step">
-          <div class="story-no">01</div>
-          <div class="story-body"><b>用户问题</b><p>营养学学生面对海量健康信息，难辨官方、行业、商业信源，容易引用二手甚至错误信息。</p></div>
-        </div>
-        <div class="story-step">
-          <div class="story-no">02</div>
-          <div class="story-body"><b>可运行工作流</b><p><b>输入</b>：收集到的 Nutrition/健康信息源 → <b>AI 处理</b>：按「官方 / 行业 / 商业」三级自动分级 → <b>人工复核</b>：边界案例逐条确认 → <b>输出</b>：结构化导航页，每条附原始 URL 与引用建议。</p></div>
-        </div>
-        <div class="story-step">
-          <div class="story-no">03</div>
-          <div class="story-body"><b>AI 策略</b><ul><li><b>分类：</b>按发布主体 + 同行评审 + 更新频率定义三级信源</li><li><b>提示词：</b>输出必须包含「机构类型 + 证据等级 + 原始 URL」</li><li><b>约束：</b>商业来源即使引用官方研究，也不得上浮为官方级</li><li><b>回退：</b>模糊来源标记「待复核」，不自动分级</li></ul></div>
-        </div>
-        <div class="story-step">
-          <div class="story-no">04</div>
-          <div class="story-body"><b>评测证据</b><p>覆盖数十条跨国 Nutrition 信息源；人工复核边界案例后，分级准确率 <span class="metric-inline">95%</span>；失败案例 = 某商业博客引用官方研究被误判为官方源，后增加「内容主体」维度修正。</p></div>
-        </div>
-        <div class="story-step">
-          <div class="story-no">05</div>
-          <div class="story-body"><b>迭代与风险</b><p><b>下一步：</b>增加时效性标签与失效链接检测。<b>误判控制：</b>所有引用必须回到一手来源核实；无原始 URL 的信息源不纳入导航。</p></div>
-        </div>
-      </div>
-      <div class="shot">📷 截图位：营养学信息源导航文档 / 三级分类结构图（实物见 D:\1\营养学信息源导航.*）</div>
-    </div>
   </div>
 </section>
 
@@ -554,9 +503,9 @@
     <p class="sub">我做过的事 → 对应的 AI 能力 → 可投递岗位 → 证据项目。</p>
     <div class="cap-grid">
       <div class="cap-row">
-        <div><span class="h">我做过的事</span><span class="v">搭建含 11,284 条结构化学位数据的院校库；为营养学学生整理跨国信源导航</span></div>
+        <div><span class="h">我做过的事</span><span class="v">搭建含 11,284 条结构化学位数据的院校库，定义字段规范与可信来源标准</span></div>
         <div><span class="h">对应 AI 能力</span><div><span class="cap-tag">知识工程</span><span class="cap-tag">RAG 知识库</span><span class="cap-tag">信源治理</span></div></div>
-        <div><span class="h">可投递岗位 · 证据项目</span><span class="v">AI 知识库 / RAG 产品设计师 ｜ 项目②院校库、项目④营养学导航</span></div>
+        <div><span class="h">可投递岗位 · 证据项目</span><span class="v">AI 知识库 / RAG 产品设计师 ｜ 项目②院校库</span></div>
       </div>
       <div class="cap-row">
         <div><span class="h">我做过的事</span><span class="v">用自然语言指令驱动 AI 完成建档、选校、规划生成等流程自动化</span></div>
