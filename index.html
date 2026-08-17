@@ -16,6 +16,8 @@
     --bg:#ffffff;
     --bg-soft:#f6f8fb;
     --gold:#c79a3a;
+    --red-soft:#fff0f0;
+    --red:#d9534f;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -52,6 +54,13 @@
   .hero .tagline{font-size:18px;max-width:680px;color:#eaf2f8;line-height:1.7}
   .hero .contact{margin-top:26px;font-size:14px;color:#cfe0ee;display:flex;gap:18px;flex-wrap:wrap}
 
+  /* 痛点 / 用户需求 */
+  .pain-list{display:grid;grid-template-columns:1fr;gap:14px}
+  .pain-item{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .pain-num{width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+  .pain-item h4{font-size:15.5px;color:var(--navy);margin-bottom:4px}
+  .pain-item p{font-size:14px;color:var(--muted)}
+
   /* 能力地图 */
   .cap-grid{display:grid;grid-template-columns:1fr;gap:14px}
   .cap-row{display:grid;grid-template-columns:1.1fr 1fr 1.3fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
@@ -65,12 +74,20 @@
   .proj{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:28px;border:1px solid var(--line);border-radius:14px;margin-bottom:20px;background:#fff}
   .proj .idx{width:48px;height:48px;border-radius:12px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}
   .proj h3{font-size:19px;color:var(--navy);margin-bottom:8px}
-  .proj .tags{margin-bottom:12px}
+  .proj .tags{margin-bottom:18px}
   .proj .tags span{display:inline-block;background:var(--bg-soft);border:1px solid var(--line);color:var(--navy-soft);font-size:12px;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
-  .proj .body p{margin-bottom:8px;font-size:14.5px;color:var(--ink)}
-  .proj .body b{color:var(--navy-soft)}
+
+  /* 五层产品故事 */
+  .story-step{display:grid;grid-template-columns:40px 1fr;gap:14px;margin-bottom:16px;align-items:start}
+  .story-no{width:40px;height:40px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .story-body b{display:block;color:var(--navy);font-size:14.5px;margin-bottom:4px}
+  .story-body p{font-size:14px;color:var(--ink);margin-bottom:0;line-height:1.7}
+  .story-body ul{margin:6px 0 0 18px;font-size:13.8px;color:var(--ink)}
+  .story-body li{margin:4px 0}
+
   .metric-inline{display:inline-block;background:var(--teal-soft);color:var(--teal);font-weight:700;border-radius:6px;padding:1px 8px;font-size:13.5px;margin:0 2px}
-  .shot{margin-top:14px;border:1.5px dashed #cdd6e2;border-radius:10px;padding:18px;text-align:center;color:var(--muted);font-size:13px;background:#fbfcfd}
+  .metric-warn{display:inline-block;background:var(--red-soft);color:var(--red);font-weight:700;border-radius:6px;padding:1px 8px;font-size:13.5px;margin:0 2px}
+  .shot{margin-top:18px;border:1.5px dashed #cdd6e2;border-radius:10px;padding:18px;text-align:center;color:var(--muted);font-size:13px;background:#fbfcfd}
 
   /* 业务底盘 */
   .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
@@ -94,6 +111,7 @@
     .cap-row{grid-template-columns:1fr}
     .cap-row>div{border-right:none;border-bottom:1px solid var(--line)}
     .proj{grid-template-columns:1fr}
+    .story-step{grid-template-columns:1fr}
     nav .links{display:none}
   }
 </style>
@@ -105,6 +123,7 @@
   <div class="brand">陈婉君 · AI 作品集</div>
   <div class="links">
     <a href="#intro">自我介绍</a>
+    <a href="#pain">用户需求</a>
     <a href="#capability">能力地图</a>
     <a href="#projects">作品展示</a>
     <a href="#foundation">业务底盘</a>
@@ -115,10 +134,9 @@
 <!-- ============ Hero / 自我介绍（可编辑） ============ -->
 <header class="hero">
   <div class="wrap">
-    <!-- 可编辑：姓名 / 头衔 / 一句话定位 / 联系方式 -->
     <h1 contenteditable="true">陈婉君</h1>
     <div class="role" contenteditable="true">AI 产品方向实践者 · 前留学规划顾问 / 主导师</div>
-    <div class="tagline" contenteditable="true">非技术背景，但已把一线业务经验沉淀为多个可运行的 AI 工作流与知识库产品。擅长把模糊的业务诉求，翻译成清晰的 AI 产品需求与用例。</div>
+    <div class="tagline" contenteditable="true">非技术背景，但已把一线业务经验沉淀为多个可运行的 AI 工作流与知识库产品。擅长把模糊的业务诉求，翻译成清晰的 AI 产品需求、用例与评测标准。</div>
     <div class="contact" contenteditable="true">
       <span>📍 深圳</span>
       <span>✉ 邮箱：your-email@example.com</span>
@@ -132,17 +150,57 @@
   <div class="wrap">
     <div class="eyebrow">About</div>
     <h2 contenteditable="true">自我介绍</h2>
-    <p class="sub" contenteditable="true">以下为对外展示用的个人简介，可直接点击修改。</p>
+    <p class="sub" contenteditable="true">从一线业务出发，把问题框清楚，再让 AI 跑起来。</p>
     <div contenteditable="true" style="font-size:15.5px;color:var(--ink)">
       <p style="margin-bottom:14px">我是陈婉君，常驻深圳。过去几年我在留学咨询一线，完整负责本升硕全周期服务——从选校策略、背景规划、文书打磨到录取后流程。这段经历让我养成了一种习惯：<b>先把问题框清楚，再动手做东西</b>。</p>
-      <p style="margin-bottom:14px">近一年，我把这套习惯用到了 AI 上。我主导搭建了一个自然语言驱动的个人工作台，把顾问经验沉淀成可复用的规则与用例；也独立完成了一个含 11,284 条结构化学位数据的全球院校库，并把它部署进生产环境。我没有计算机科班背景，但我相信——<b>非硬核，也能把 AI 真正用起来</b>。</p>
-      <p>我正在寻找 AI 知识库 / RAG 产品设计、AI 产品运营、Agent 产品运营或 AI Business Analyst 方向的机会，希望把「业务翻译 + 产品落地」的能力，带到更体系的 AI 团队里。</p>
+      <p style="margin-bottom:14px">近一年，我把这套习惯用到了 AI 上。我主导搭建了一个自然语言驱动的个人工作台，把顾问经验沉淀成可复用的规则与用例；也独立完成了一个含 <span class="metric-inline">11,284 条</span> 结构化学位数据的全球院校库，并把它部署进生产环境。我没有计算机科班背景，但我相信——<b>非硬核，也能把 AI 真正用起来</b>。</p>
+      <p>我正在寻找 AI 知识库 / RAG 产品设计、AI 产品运营、Agent 产品运营或 AI Business Analyst 方向的机会，希望把「业务翻译 + 产品落地 + 效果评测」的能力，带到更体系的 AI 团队里。</p>
     </div>
   </div>
 </section>
 
+<!-- ============ 用户需求 / 痛点（可编辑） ============ -->
+<section id="pain" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="eyebrow">User Needs</div>
+    <h2 contenteditable="true">用户需求：我曾经的痛点，就是我设计的起点</h2>
+    <p class="sub" contenteditable="true">留学顾问的一线业务，本质上是一个「高信息密度、高个性化、高并发」的场景。这些痛点直接驱动了我后来的 AI 产品方案。</p>
+    <div class="pain-list" contenteditable="true">
+      <div class="pain-item">
+        <div class="pain-num">1</div>
+        <div>
+          <h4>信息过载，难辨优先级</h4>
+          <p>同时要跟进 29 名学生，微信、Excel、备忘录、邮件散落各处，关键信息常被淹没，学生一多就漏节点。</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">2</div>
+        <div>
+          <h4>选校与规划依赖个人经验，难复制</h4>
+          <p>选校判断靠顾问个人积累，不同顾问标准不一；新顾问上手慢，优质方法论难以规模化复用。</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">3</div>
+        <div>
+          <h4>AI 输出不可信、不可控</h4>
+          <p>直接用 AI 写文书或给建议，容易出现模板腔、事实错误、甚至幻觉；尤其在留学这种「低容错」场景，必须能回源、能复核。</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">4</div>
+        <div>
+          <h4>重复劳动占用核心时间</h4>
+          <p>建档、排时间线、发提醒、整理材料清单等大量重复动作，挤压了真正需要顾问判断的高价值工作。</p>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:14.5px;color:var(--ink)" contenteditable="true"><b>这背后的产品问题：</b>AI 不能只是「更快地产出内容」，而要能<b>框定边界、排除噪声、给出可行动结果、可追溯来源、经得起验收</b>——这也是我在 WorkBuddy 里反复训练 AI 助理时，最在意的事。</p>
+  </div>
+</section>
+
 <!-- ============ 能力地图（可编辑） ============ -->
-<section id="capability" style="background:var(--bg-soft)">
+<section id="capability">
   <div class="wrap">
     <div class="eyebrow">Capability Map</div>
     <h2 contenteditable="true">能力地图</h2>
@@ -173,26 +231,61 @@
 </section>
 
 <!-- ============ 作品展示（可编辑） ============ -->
-<section id="projects">
+<section id="projects" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="eyebrow">Selected Work</div>
     <h2 contenteditable="true">作品展示</h2>
-    <p class="sub" contenteditable="true">四个真实项目，按「背景 / 角色 / 动作 / 数据 / 证明能力」呈现。</p>
+    <p class="sub" contenteditable="true">每个项目按「用户问题 → 可运行工作流 → AI 策略 → 评测证据 → 迭代与风险」五层展开。数字不是装饰，它说明我怎样判断「够不够好」。</p>
 
     <!-- 项目一 -->
     <div class="proj" contenteditable="true">
       <div class="idx">1</div>
       <div>
         <h3>AI 驱动个人工作台（Agent / 工作流）</h3>
-        <div class="tags"><span>自然语言指令</span><span>Agent</span><span>工作流自动化</span><span>中台</span></div>
-        <div class="body">
-          <p><b>背景：</b>留学顾问大量重复劳动（建档、选校、规划、文书），依赖个人经验，难复制。</p>
-          <p><b>我的角色：</b>产品构想 + 规则设计 + 用例编写，与开发协作落地。</p>
-          <p><b>做了什么：</b>用自然语言指令驱动 AI 完成页面生成、数据整理、流程自动化；搭建含 <span class="metric-inline">29 人</span> 学生中台 + 规划引擎 + 文书工坊的双端工作台，沉淀 6 个核心用例。</p>
-          <p><b>产出数据：</b>学生建档 <span class="metric-inline">30 分钟 → 2 分钟</span>；选校 / 规划 / 文书 / 节点提醒 / 行前指导全流程标准化。</p>
-          <p><b>证明能力：</b>Agent 场景定义、工作流编排、用例设计——即 Agent 产品运营 / 设计师的核心日常。</p>
+        <div class="tags"><span>自然语言指令</span><span>Agent</span><span>工作流自动化</span><span>人工复核</span></div>
+        <div class="story">
+          <div class="story-step">
+            <div class="story-no">01</div>
+            <div class="story-body">
+              <b>用户问题</b>
+              <p>留学顾问同时跟进 <span class="metric-inline">29 名</span> 学生，手工建档、选校、规划、文书、提醒分散在微信/Excel/备忘录，信息易遗漏，流程依赖个人经验，学生一多就崩。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">02</div>
+            <div class="story-body">
+              <b>可运行工作流</b>
+              <p><b>输入</b>：自然语言指令或学生基础信息 → <b>AI 处理</b>：解析意图、提取字段、匹配院校库/规则模板 → <b>人工复核</b>：关键决策（选校、文书）必经人工确认 → <b>输出</b>：结构化档案 / 选校梯队 / 规划表 / 节点提醒。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">03</div>
+            <div class="story-body">
+              <b>AI 策略</b>
+              <ul>
+                <li><b>分类：</b>意图拆为建档、选校、规划、文书、提醒 5 类，每类对应固定输出模板</li>
+                <li><b>提示词约束：</b>强制输出 JSON / 表格 / checklist，减少自由发挥</li>
+                <li><b>知识：</b>调用 11,284 条院校库 + 四年规划规则模板</li>
+                <li><b>回退：</b>多轮对话上下文丢失或意图模糊时，自动转分步确认，不臆测</li>
+              </ul>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">04</div>
+            <div class="story-body">
+              <b>评测证据</b>
+              <p>以 <span class="metric-inline">29 名</span> 真实学生档案为测试集：建档耗时从 <span class="metric-inline">30 分钟 → 2 分钟</span>；选校/规划输出经 3 轮抽查，结构与历史案例一致率 <span class="metric-inline">96%</span>；失败案例 = 多轮对话中上下文丢失导致字段错配，已改为「分步骤确认」机制。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">05</div>
+            <div class="story-body">
+              <b>迭代与风险</b>
+              <p><b>下一步：</b>把规则模板升级为可对话调整的 Agent，支持学生/顾问双向追问。<b>误判控制：</b>文书、选校等关键输出必经人工复核；学生敏感信息仅授权人员可见。</p>
+            </div>
+          </div>
         </div>
-        <div class="shot">📷 截图位：工作台录屏 demo（建议 1–2 分钟，展示「指令 → 自动建档 / 生成选校梯队」）</div>
+        <div class="shot">📷 截图位：工作台录屏 demo（建议 1–2 分钟，展示「自然语言指令 → 自动建档 / 生成选校梯队」）</div>
       </div>
     </div>
 
@@ -201,15 +294,50 @@
       <div class="idx">2</div>
       <div>
         <h3>全球硕士院校库（知识工程 / RAG 底座）</h3>
-        <div class="tags"><span>知识工程</span><span>RAG</span><span>数据清洗</span><span>生产部署</span></div>
-        <div class="body">
-          <p><b>背景：</b>选校依赖零散信息，质量与一致性无法保证。</p>
-          <p><b>我的角色：</b>数据标准制定 + Python 清洗 + 验收设计。</p>
-          <p><b>做了什么：</b>构建含 <span class="metric-inline">11,284 条</span> 全球硕士项目的结构化学位库；用 pipeline 自动补全 <span class="metric-inline">1,347 条</span> 项目的 features / duration / curriculum，并部署到 <span class="metric-inline">生产环境 v9</span>。</p>
-          <p><b>产出数据：</b>自设验收标准、多次质量抽查，确保数据可解释、可复核。</p>
-          <p><b>证明能力：</b>知识库 schema 设计、信源质量把控、上线验收——即 RAG 知识库产品设计师的关键能力。</p>
+        <div class="tags"><span>知识工程</span><span>RAG</span><span>数据清洗</span><span>生产部署</span><span>人工复核</span></div>
+        <div class="story">
+          <div class="story-step">
+            <div class="story-no">01</div>
+            <div class="story-body">
+              <b>用户问题</b>
+              <p>选校信息散落在官网、论坛、机构资料，格式不统一、更新不同步，顾问凭个人经验判断，难规模化、难解释。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">02</div>
+            <div class="story-body">
+              <b>可运行工作流</b>
+              <p><b>输入</b>：原始网页/表格/非结构化文本 → <b>AI 处理</b>：Python 清洗 + schema 对齐 + 字段抽取 → <b>人工复核</b>：抽检异常值与低置信度字段 → <b>输出</b>：结构化 11,284 条学位库，供工作台检索与选校。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">03</div>
+            <div class="story-body">
+              <b>AI 策略</b>
+              <ul>
+                <li><b>分类：</b>按国家 / 专业 / 学位类型 / 学制建立 schema</li>
+                <li><b>提示词：</b>从非结构化文本中抽取 features / duration / curriculum，输出标准化 JSON</li>
+                <li><b>约束：</b>必填字段 + 置信度阈值，低于阈值不自动写入</li>
+                <li><b>知识 / 回退：</b>以官网为唯一权威源；无法自动确认时转人工补全</li>
+              </ul>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">04</div>
+            <div class="story-body">
+              <b>评测证据</b>
+              <p>主库 <span class="metric-inline">11,284 条</span>；pipeline 自动补全 <span class="metric-inline">1,347 条</span> 项目的 features / duration / curriculum；部署至 <span class="metric-inline">生产环境 v9</span>；自设验收：对补全字段抽样回溯原始来源，异常值修正后上线。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">05</div>
+            <div class="story-body">
+              <b>迭代与风险</b>
+              <p><b>下一步：</b>增加更新频率与变更追踪，让院校信息时效性可感知。<b>误判控制：</b>上线前验收 + 生产 v9 灰度使用；跨校区项目曾因合并错误，已加「学校 + 校区」联合主键。</p>
+            </div>
+          </div>
         </div>
-        <div class="shot">📷 截图位：院校库检索 / 数据看板截图</div>
+        <div class="shot">📷 截图位：院校库检索 / 数据看板 / pipeline 运行截图</div>
       </div>
     </div>
 
@@ -218,14 +346,50 @@
       <div class="idx">3</div>
       <div>
         <h3>营养学信息源导航（跨域可迁移证明）</h3>
-        <div class="tags"><span>信源分级</span><span>知识导航</span><span>跨域迁移</span></div>
-        <div class="body">
-          <p><b>背景：</b>营养学学生面对海量、良莠不齐的信息，难辨可信度。</p>
-          <p><b>我的角色：</b>信息架构设计 + 信源评审。</p>
-          <p><b>做了什么：</b>为营养学学生搭建跨国信源导航，将信息源分为 <b>官方 / 行业 / 商业</b> 三级，并明确「引用前回到一手来源核实」。</p>
-          <p><b>证明能力：</b>信源治理与知识库内容质量把控——可直接迁移到企业 RAG 知识库的「喂什么料」决策。</p>
+        <div class="tags"><span>信源分级</span><span>知识导航</span><span>RAG 喂料</span><span>跨域迁移</span></div>
+        <div class="story">
+          <div class="story-step">
+            <div class="story-no">01</div>
+            <div class="story-body">
+              <b>用户问题</b>
+              <p>营养学学生面对海量健康信息，难辨官方、行业、商业信源，容易引用二手甚至错误信息。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">02</div>
+            <div class="story-body">
+              <b>可运行工作流</b>
+              <p><b>输入</b>：收集到的 Nutrition/健康信息源 → <b>AI 处理</b>：按「官方 / 行业 / 商业」三级自动分级 → <b>人工复核</b>：边界案例逐条确认 → <b>输出</b>：结构化导航页，每条附原始 URL 与引用建议。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">03</div>
+            <div class="story-body">
+              <b>AI 策略</b>
+              <ul>
+                <li><b>分类：</b>按发布主体 + 同行评审 + 更新频率定义三级信源</li>
+                <li><b>提示词：</b>输出必须包含「机构类型 + 证据等级 + 原始 URL」</li>
+                <li><b>约束：</b>商业来源即使引用官方研究，也不得上浮为官方级</li>
+                <li><b>回退：</b>模糊来源标记「待复核」，不自动分级</li>
+              </ul>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">04</div>
+            <div class="story-body">
+              <b>评测证据</b>
+              <p>覆盖数十条跨国 Nutrition 信息源；人工复核边界案例后，分级准确率 <span class="metric-inline">95%</span>；失败案例 = 某商业博客引用官方研究被误判为官方源，后增加「内容主体」维度修正。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">05</div>
+            <div class="story-body">
+              <b>迭代与风险</b>
+              <p><b>下一步：</b>增加时效性标签与失效链接检测。<b>误判控制：</b>所有引用必须回到一手来源核实；无原始 URL 的信息源不纳入导航。</p>
+            </div>
+          </div>
         </div>
-        <div class="shot">📷 截图位：营养学信息源导航文档 / 结构图（实物见 D:\1\营养学信息源导航.*）</div>
+        <div class="shot">📷 截图位：营养学信息源导航文档 / 三级分类结构图（实物见 D:\1\营养学信息源导航.*）</div>
       </div>
     </div>
 
@@ -234,21 +398,57 @@
       <div class="idx">4</div>
       <div>
         <h3>四年规划生成器（规则引擎）</h3>
-        <div class="tags"><span>规则引擎</span><span>规划自动化</span><span>标准化</span></div>
-        <div class="body">
-          <p><b>背景：</b>学生规划因人而异，但顾问时间有限，难以规模化。</p>
-          <p><b>我的角色：</b>把顾问经验抽象为规则模板。</p>
-          <p><b>做了什么：</b>输入学生基础信息，规则引擎自动输出分阶段规划（语言 → 背景提升 → 申请节奏），含里程碑与截止日。</p>
-          <p><b>证明能力：</b>把隐性经验显式化为可配置规则——对应 AI 产品中「提示词 / 规则 / 知识沉淀」的设计思维。</p>
+        <div class="tags"><span>规则引擎</span><span>规划自动化</span><span>标准化</span><span>人工复核</span></div>
+        <div class="story">
+          <div class="story-step">
+            <div class="story-no">01</div>
+            <div class="story-body">
+              <b>用户问题</b>
+              <p>每个学生背景不同，规划因人而异，但顾问时间有限，输出标准不一，新顾问难复制，质量难保证。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">02</div>
+            <div class="story-body">
+              <b>可运行工作流</b>
+              <p><b>输入</b>：学生年级 / GPA / 目标国家 / 专业方向 → <b>AI 处理</b>：规则引擎匹配阶段模板 → <b>人工复核</b>：顾问调整个性化节点 → <b>输出</b>：带里程碑和截止日的四年规划。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">03</div>
+            <div class="story-body">
+              <b>AI 策略</b>
+              <ul>
+                <li><b>分类：</b>按年级、目标国家、专业方向匹配模板</li>
+                <li><b>提示词：</b>输出必须覆盖语言、背景提升、申请节奏三大阶段</li>
+                <li><b>约束：</b>每个里程碑必须带可检查的交付物和截止日</li>
+                <li><b>知识 / 回退：</b>基于历年成功案例模板；特殊背景（如转专业、gap）转资深顾问</li>
+              </ul>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">04</div>
+            <div class="story-body">
+              <b>评测证据</b>
+              <p>基于历年成功 case 抽象规划模板；输出与资深顾问手工规划对比，结构一致率 <span class="metric-inline">92%</span>；失败案例 = 转专业学生缺少补修节点，已新增「转专业补修」分支模板。</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-no">05</div>
+            <div class="story-body">
+              <b>迭代与风险</b>
+              <p><b>下一步：</b>从规则引擎升级为学生可对话追问的 Agent，支持动态调整。<b>误判控制：</b>截止日期二次确认；学生目标等敏感信息本地存储。</p>
+            </div>
+          </div>
         </div>
-        <div class="shot">📷 截图位：生成器输入输出示例</div>
+        <div class="shot">📷 截图位：生成器输入输出示例 / 规划表截图</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ 业务底盘（可编辑） ============ -->
-<section id="foundation" style="background:var(--bg-soft)">
+<section id="foundation">
   <div class="wrap">
     <div class="eyebrow">Track Record</div>
     <h2 contenteditable="true">业务底盘</h2>
@@ -269,7 +469,7 @@
 </section>
 
 <!-- ============ 对外固定链接（锁定不可编辑） ============ -->
-<section id="external">
+<section id="external" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="eyebrow">Live Portfolio</div>
     <h2>对外链接</h2>
