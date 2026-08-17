@@ -167,7 +167,6 @@
     .proj-header{flex-direction:column}
     nav .links{display:none}
   }
-</style>
 
   /* 对内编辑工具条：右下角悬浮小圆点，默认极简，点击展开 */
   #editbar{position:fixed;right:20px;bottom:20px;z-index:50;font-family:inherit}
@@ -184,7 +183,9 @@
   .eb-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
   .eb-btn.primary:hover{background:#0c8276}
   .eb-status{color:var(--muted);font-size:11px;text-align:center;padding-top:4px}
-  </head>
+  </style>
+
+</head>
 <body>
 
 <!-- ============ 顶部导航 ============ -->
@@ -192,11 +193,11 @@
   <div class="brand">陈婉君 · AI 作品集</div>
   <div class="links">
     <a href="#intro">自我介绍</a>
-    <a href="#context">为什么需要新系统</a>
-    <a href="#challenge">问题定义</a>
-    <a href="#lifecycle">服务流程</a>
+    <a href="#context">问题与目标</a>
+    <a href="#system">系统设计</a>
     <a href="#projects">作品展示</a>
     <a href="#research">市场验证</a>
+    <a href="#capability">能力地图</a>
     <a href="#foundation">业务底盘</a>
     <a href="#external">对外链接</a>
   </div>
@@ -230,6 +231,8 @@
 </header>
 
 <!-- ============ 自我介绍 正文（可编辑） ============ -->
+
+<!-- ============ 自我介绍 ============ -->
 <section id="intro">
   <div class="wrap">
     <div class="eyebrow">About</div>
@@ -243,91 +246,57 @@
   </div>
 </section>
 
-<!-- ============ 01 / PRODUCT CONTEXT 为什么需要一套新系统？（可编辑） ============ -->
+<!-- ============ 01 / 问题与目标：为什么需要新系统？ ============ -->
 <section id="context" style="background:var(--bg-soft)">
   <div class="wrap">
-    <div class="eyebrow">01 / Product Context</div>
-    <h2>为什么需要一套新系统？<span class="en">Why AI-Native Workflow for Study-Abroad Consulting?</span></h2>
-    <p class="sub">传统留学服务依赖多工具、多角色与大量人工沟通，信息在交接过程中持续损耗，AI 能力也难以进入真实生产流程。以下是我每天面对的真实痛点。</p>
+    <div class="eyebrow">01 / Problem & Goals</div>
+    <h2>为什么需要新系统？<span class="en">Why AI-Native Workflow?</span></h2>
+    <p class="sub">传统留学服务依赖多工具、多角色与大量人工沟通，信息在交接过程中持续损耗。我的一线痛点决定了这套系统要解决什么问题。</p>
 
     <div class="big-card">
       <h3>不是再做一个后台，而是重构留学服务的交付方式。</h3>
-      <p>我在工作中用过简道云等公司系统，但选校模块基本鸡肋、简历无法联动、整体利用率很低。大多数时间我仍然需要在 Excel 和学校官网之间反复横跳。AI 不该只是搜索或写作工具，它应该成为贯穿学生服务全周期的协作能力。</p>
+      <p>公司在用简道云系统，但选校模块鸡肋、简历无法联动、整体利用率很低。大多数时间我仍在 Excel 和学校官网之间反复横跳。签证/行前部分完全没有支持文件和数据，只能靠自己整理。AI 不该只是搜索或写作工具，它应该成为贯穿学生服务全周期的协作能力。</p>
     </div>
 
     <div class="card-grid">
       <div class="card">
         <div class="num">01 / TOOL FRAGMENTATION</div>
-        <h4>工具割裂：现有系统利用率低</h4>
-        <p>公司在用简道云系统，但选校模块功能鸡肋、无法与简历联动，顾问实际工作中很少使用。信息分散在微信、Excel、备忘录和学校官网，交接时经常断档。</p>
+        <h4>工具割裂</h4>
+        <p>简道云选校模块利用率低，信息分散在微信、Excel、备忘录和学校官网，交接时经常断档。</p>
       </div>
       <div class="card">
         <div class="num">02 / INFORMATION OVERLOAD</div>
-        <h4>信息过载：选校查校效率极低</h4>
-        <p>我的工作需求是筛选海内外学校和专业。过去用 Excel 表格挨个查，或打开学校官网逐条核对，为学生做一份选校清单往往要花 30 分钟到 1 小时。</p>
+        <h4>信息过载</h4>
+        <p>用 Excel 或官网逐个查海内外院校专业，整理一份选校清单要花 <span class="metric-inline">30 分钟–1 小时</span>。</p>
       </div>
       <div class="card">
         <div class="num">03 / ROLE HANDOFF LOSS</div>
-        <h4>交接损耗：签证/行前缺少支持</h4>
-        <p>公司没有给我签证部分的支持文件和数据。我只能整理自己过往经历和数据，把签证流程、材料清单、行前准备重新做成可复用的模块。</p>
+        <h4>交接损耗</h4>
+        <p>学生、顾问、文书、申请、签证多角色参与，信息在交接中失真，关键节点容易遗漏。</p>
       </div>
       <div class="card">
         <div class="num">04 / INVISIBLE AI</div>
         <h4>AI 能力不可感知</h4>
-        <p>AI 在团队中只能当搜索或文案工具用，没有嵌入决策流程。学生建档、选校梯队、时间规划、材料提醒这些高频动作，仍然靠人工重复完成。</p>
-      </div>
-    </div>
-
-    <p style="margin-top:28px;font-size:14.5px;color:var(--ink)"><b>这背后的产品问题：</b>留学服务是一个「高信息密度、高个性化、高并发」的场景，AI 不能只是更快地产出内容，而要能<b>框定边界、排除噪声、给出可行动结果、可追溯来源、经得起验收</b>——这也是我最在意的事。</p>
-  </div>
-</section>
-
-<!-- ============ 02 / CHALLENGE & GOALS 复杂系统，必须先定义正确的问题（可编辑） ============ -->
-<section id="challenge">
-  <div class="wrap">
-    <div class="eyebrow">02 / Challenge &amp; Goals</div>
-    <h2>复杂系统，必须先定义正确的问题。<span class="en">Design the System Before the Screen.</span></h2>
-    <p class="sub">挑战不在于页面数量，而在于如何让不同角色围绕同一学生协作，同时保持权限、状态和责任边界清晰。</p>
-
-    <div class="card-grid">
-      <div class="card">
-        <div class="num">01 / ROLE COMPLEXITY</div>
-        <h4>角色复杂度</h4>
-        <p>学生、家长、顾问、文书老师、申请老师、签证老师等多角色参与，各自关注点不同，信息容易在交接中失真。</p>
-      </div>
-      <div class="card">
-        <div class="num">02 / LIFECYCLE CONTINUITY</div>
-        <h4>生命周期连续性</h4>
-        <p>从初次咨询到最终入学，跨度 1–4 年，需求、材料、状态持续变化，必须保证全流程可追溯。</p>
-      </div>
-      <div class="card">
-        <div class="num">03 / STATE VISIBILITY</div>
-        <h4>状态可见性</h4>
-        <p>每个学生的申请节点、材料完成度、待办事项需要实时同步，否则顾问和学生都会漏掉关键截止日。</p>
-      </div>
-      <div class="card">
-        <div class="num">04 / SYSTEM SCALABILITY</div>
-        <h4>系统可扩展性</h4>
-        <p>新国家、新专业、新流程不断涌现，系统不能靠每次重新开发来适应，而应由规则模板和知识库驱动。</p>
+        <p>AI 只能当搜索或文案工具用，没有嵌入建档、选校、规划、提醒等真实决策流程。</p>
       </div>
     </div>
 
     <div class="framework" style="margin-top:28px">
-      <h4>SUCCESS FRAMEWORK · What Good Looks Like</h4>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>Single Source of Truth</b>：学生档案、申请状态、院校数据统一维护，避免多份 Excel 互相打架。</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>Observable AI</b>：AI 给出结果时，必须同时呈现依据、置信度和可干预入口，而不是黑盒输出。</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>Clear Responsibility</b>：AI 负责信息整理与初筛，顾问负责关键判断与复核，边界清晰。</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>Shortest Task Path</b>：把选校/时间表调整从 30–60 分钟压缩到 3 分钟以内，释放顾问的高价值时间。</div></div>
+      <h4>What Good Looks Like · 成功框架</h4>
+      <div class="fw-item"><div class="fw-dot"></div><div><b>Single Source of Truth：</b>学生档案、申请状态、院校数据统一维护，避免多份 Excel 互相打架。</div></div>
+      <div class="fw-item"><div class="fw-dot"></div><div><b>Observable AI：</b>AI 给出结果时，必须同时呈现依据、置信度和可干预入口，而不是黑盒输出。</div></div>
+      <div class="fw-item"><div class="fw-dot"></div><div><b>Clear Responsibility：</b>AI 负责信息整理与初筛，顾问负责关键判断与复核，边界清晰。</div></div>
+      <div class="fw-item"><div class="fw-dot"></div><div><b>Shortest Task Path：</b>把选校/时间表调整从 30–60 分钟压缩到 3 分钟以内。</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ 03 / ROLE ECOSYSTEM 角色生态（可编辑） ============ -->
-<section id="roles" style="background:var(--bg-soft)">
+<!-- ============ 02 / 系统设计：AI 工作台如何运转 ============ -->
+<section id="system">
   <div class="wrap">
-    <div class="eyebrow">03 / Role Ecosystem</div>
-    <h2>一条统一的学生服务主线。<span class="en">Different Views. Shared Reality.</span></h2>
-    <p class="sub">每个角色拥有与任务相关的工作台，但学生目标、状态、交付物与 AI 上下文始终保持一致。</p>
+    <div class="eyebrow">02 / System Design</div>
+    <h2>AI 工作台：一条统一的学生服务主线。<span class="en">One System. Multiple Roles. Visible AI.</span></h2>
+    <p class="sub">围绕统一学生主线，为不同角色提供与任务相关的工作台；AI 不是额外工具，而是嵌入主线的协作能力。</p>
 
     <div class="ecosystem">
       <div class="eco-core">
@@ -343,17 +312,8 @@
         <div class="eco-role"><div class="r">签证/行前老师</div><div class="d">基于标准清单完成签证与行前服务</div></div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ============ 04 / DELIVERY LIFECYCLE 服务流程（可编辑） ============ -->
-<section id="lifecycle">
-  <div class="wrap">
-    <div class="eyebrow">04 / Delivery Lifecycle</div>
-    <h2>从学生需求，到录取交付。<span class="en">One Continuous Delivery Lifecycle.</span></h2>
-    <p class="sub">以学生为主线连接每一个专业阶段，让输入、交付物、责任人与状态在交接时保持连续。</p>
-
-    <div class="flow">
+    <div class="flow" style="margin:28px 0">
       <div class="flow-step"><div class="no">01</div><div class="ttl">需求沟通</div><div class="sub2">Consult</div></div>
       <div class="flow-step"><div class="no">02</div><div class="ttl">背景评估</div><div class="sub2">Assess</div></div>
       <div class="flow-step"><div class="no">03</div><div class="ttl">选校定校</div><div class="sub2">Match</div></div>
@@ -363,95 +323,29 @@
       <div class="flow-step"><div class="no">07</div><div class="ttl">签证/行前</div><div class="sub2">Depart</div></div>
     </div>
 
-    <div class="big-card">
-      <h3>AI 贯穿流程，而不是停留在单一功能入口。</h3>
-      <p>每个阶段都对应一个可复用的 AI 工作流：需求沟通阶段自动建档、选校阶段调用院校库生成梯队、文书阶段提供结构化素材、申请阶段推送节点提醒、签证阶段基于历史数据生成 checklist。AI 不是额外工具，而是嵌入主线的协作能力。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 05 / INFORMATION ARCHITECTURE 信息架构（可编辑） ============ -->
-<section id="architecture" style="background:var(--bg-soft)">
-  <div class="wrap">
-    <div class="eyebrow">05 / Information Architecture</div>
-    <h2>一个系统，多种角色视角。<span class="en">Shared Architecture. Contextual Experience.</span></h2>
-    <p class="sub">通过共享平台能力与角色化信息结构，减少重复建设，同时保证每类用户只看到与当前任务相关的内容。</p>
-
     <div class="card-grid">
       <div class="card">
-        <div class="num">PLATFORM ARCHITECTURE</div>
-        <h4>平台架构</h4>
-        <p><b>Role Workspaces：</b>学生、家长、顾问、文书、申请、签证/行前<br><b>Core Capabilities：</b>建档、选校、规划、文书、申请、提醒、签证、行前<br><b>Shared Data：</b>学生档案、院校库、规则模板、申请状态、历史案例<br><b>Governance：</b>权限、审计、数据安全、版本管理</p>
-      </div>
-      <div class="card">
-        <div class="num">ROLE &amp; PERMISSION MODEL</div>
+        <div class="num">INFORMATION ARCHITECTURE</div>
         <h4>View × Action × Data</h4>
-        <p><b>View 看见什么：</b>按角色过滤页面与指标<br><b>Action 能够做什么：</b>创建、编辑、审批、导出<br><b>Data 能够访问什么：</b>学生、项目、经营数据按权限隔离<br><i>Least privilege. Clear responsibility.</i></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 06 / AI AGENT COLLABORATION AI协作（可编辑） ============ -->
-<section id="agent">
-  <div class="wrap">
-    <div class="eyebrow">06 / AI Agent Collaboration</div>
-    <h2>让 AI 从黑盒能力，成为协作伙伴。<span class="en">Visible. Traceable. Trustworthy.</span></h2>
-    <p class="sub">AI 不仅提供结果，还需要呈现输入、执行过程、当前状态、异常原因与可干预入口。</p>
-
-    <div class="big-card">
-      <h3>Human sets the goal. AI accelerates the work.</h3>
-      <p>在我的工作台里，顾问设定目标（如「为某学生生成选校梯队」），AI 负责信息检索、初筛与格式化，最终判断权始终在人。用户始终能回答三个问题：AI 正在做什么？为什么这样做？以及下一步如何介入？</p>
-    </div>
-
-    <div class="card-grid" style="margin-top:22px">
-      <div class="card">
-        <div class="num">STATUS</div>
-        <h4>状态</h4>
-        <p>每个 AI 任务都有明确状态：待处理 / 运行中 / 已完成 / 需复核 / 失败。</p>
+        <p><b>看见什么：</b>按角色过滤页面与指标<br><b>能够做什么：</b>创建、编辑、审批、导出<br><b>能够访问什么：</b>学生、项目、经营数据按权限隔离</p>
       </div>
       <div class="card">
-        <div class="num">PROGRESS</div>
-        <h4>进度</h4>
-        <p>多步骤任务展示当前步骤、剩余步骤与预计产出，避免顾问反复追问。</p>
+        <div class="num">AI COLLABORATION</div>
+        <h4>状态 · 进度 · 依据 · 控制</h4>
+        <p>每个 AI 任务都有明确状态；多步骤任务展示进度；输出附带数据来源；关键输出提供修改、回退、重新生成入口。</p>
       </div>
-      <div class="card">
-        <div class="num">RATIONALE</div>
-        <h4>依据</h4>
-        <p>输出必须附带数据来源、规则依据或参考案例，支持一键回源复核。</p>
-      </div>
-      <div class="card">
-        <div class="num">CONTROL</div>
-        <h4>控制</h4>
-        <p>关键输出（选校、文书、签证材料）提供修改、回退、重新生成入口。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 07 / CORE EXPERIENCE FLOW 核心体验流（可编辑） ============ -->
-<section id="flow" style="background:var(--bg-soft)">
-  <div class="wrap">
-    <div class="eyebrow">07 / Core Experience Flow</div>
-    <h2>同一个学生，在不同角色间持续推进。<span class="en">A Continuous Cross-role Experience.</span></h2>
-    <p class="sub">每一次交接都保留上下文、责任人与交付物，避免团队重新理解学生。</p>
-
-    <div class="shot" style="background:#fff">
-      📷 截图位：核心体验流程图（从需求沟通 → 选校 → 文书 → 申请 → 签证，每个节点标注责任人与交付物）
     </div>
 
     <div class="framework" style="margin-top:22px">
-      <h4>Every handoff carries context.</h4>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>需求与目标：</b>学生背景、目标国家/专业、预算与时间线</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>当前状态：</b>每个阶段的完成度、阻塞项、下一步动作</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>责任人：</b>每个任务都有明确 owner，避免扯皮</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>交付物：</b>选校梯队、规划表、文书素材、材料清单等结构化输出</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>AI 上下文：</b>历史对话、规则模板、院校库检索记录可复用</div></div>
+      <h4>核心设计原则</h4>
+      <div class="fw-item"><div class="fw-dot"></div><div><b>Human sets the goal. AI accelerates the work.</b> 顾问设定目标，AI 负责信息检索、初筛与格式化，最终判断权始终在人。</div></div>
+      <div class="fw-item"><div class="fw-dot"></div><div><b>Every handoff carries context.</b> 每次角色交接都保留学生背景、当前状态、责任人与交付物，避免团队重新理解学生。</div></div>
+      <div class="fw-item"><div class="fw-dot"></div><div><b>Design System 支撑规模化。</b> 统一 Tokens、Components、Patterns、Templates，让新国家、新专业、新流程的加入不需要重新开发。</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ 08 / SELECTED WORK 作品展示（可编辑） ============ -->
+<!-- ============ 03 / 作品展示 ============ -->
 <section id="projects">
   <div class="wrap">
     <div class="eyebrow">08 / Selected Work</div>
@@ -473,7 +367,7 @@
           <div class="story-no">01</div>
           <div class="story-body">
             <b>用户问题</b>
-            <p>公司在用简道云系统，但选校模块鸡肋、简历无法联动，整体利用率很低。我的实际工作是：用 Excel 表格或学校官网逐个查海内外院校专业，为一名学生整理选校清单和时间表要花 <span class="metric-inline">30 分钟–1 小时</span>；签证/行前部分完全没有支持文件和数据，只能靠自己整理。</p>
+            <p>现有系统选校模块利用率低、简历无法联动，顾问仍靠 Excel/官网逐个查校。为一名学生整理选校清单和时间表要花 30 分钟–1 小时；签证/行前部分缺少支持文件和数据。</p>
           </div>
         </div>
 
@@ -635,7 +529,7 @@
   </div>
 </section>
 
-<!-- ============ 09 / COMPETITIVE RESEARCH 竞品与市场验证（可编辑） ============ -->
+<!-- ============ 04 / 竞品与市场验证 ============ -->
 <section id="research" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="eyebrow">09 / Competitive Research</div>
@@ -668,43 +562,7 @@
   </div>
 </section>
 
-<!-- ============ 10 / DESIGN SYSTEM & OUTCOME 设计系统与成果（可编辑） ============ -->
-<section id="outcome">
-  <div class="wrap">
-    <div class="eyebrow">10 / Design System &amp; Outcome</div>
-    <h2>统一体验，支撑系统持续扩展。<span class="en">Designed to Scale.</span></h2>
-    <p class="sub">通过共享设计系统、信息架构与协作规则，为不同角色、不同终端和持续新增业务建立稳定基础。</p>
-
-    <div class="card-grid">
-      <div class="card">
-        <div class="num">DESIGN SYSTEM FOUNDATION</div>
-        <h4>Consistency Across Every Workspace</h4>
-        <p><b>01 Tokens：</b>颜色、字体、间距、圆角<br><b>02 Components：</b>按钮、卡片、表格、状态<br><b>03 Patterns：</b>搜索、筛选、审批、交接<br><b>04 Templates：</b>工作台、列表、详情、流程</p>
-      </div>
-      <div class="card dark">
-        <div class="num">OUTCOME</div>
-        <h4 style="color:#fff">从功能集合升级为可理解、可协作、可信赖的 AI 工作系统。</h4>
-        <p>通过统一流程、角色化体验、AI 状态反馈与可复用设计系统，降低顾问认知成本，提升团队协作与交付效率。</p>
-      </div>
-    </div>
-
-    <div class="outcome">
-      <div class="outcome-card"><div class="num">4</div><div class="lbl">核心子系统<br>选校 / 时间表 / 签证/行前 / 院校库</div></div>
-      <div class="outcome-card"><div class="num">6+</div><div class="lbl">服务角色<br>学生 / 家长 / 顾问 / 文书 / 申请 / 签证</div></div>
-      <div class="outcome-card"><div class="num">30+</div><div class="lbl">关键流程节点<br>从咨询到入学全周期覆盖</div></div>
-      <div class="outcome-card"><div class="num">1</div><div class="lbl">统一系统<br>基于自然语言指令的 AI 工作台</div></div>
-    </div>
-
-    <div class="framework">
-      <h4>Reflection · 项目复盘</h4>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>The interface was not the hardest part.</b> 真正的挑战是定义角色关系、信息流转、责任边界与 AI 介入方式。只有先设计系统，页面才能保持一致并持续扩展。</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>AI 产品必须设计过程反馈，而不只展示结果。</b> 状态、依据、控制三层信任机制，是让顾问愿意把高频工作交给 AI 的前提。</div></div>
-      <div class="fw-item"><div class="fw-dot"></div><div><b>Design System 是多端协作与规模化迭代的基础。</b> 统一的组件与规则模板，让新国家、新专业、新流程的加入不需要重新开发。</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 能力地图（可编辑） ============ -->
+<!-- ============ 05 / 能力地图 ============ -->
 <section id="capability" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="eyebrow">Capability Map</div>
@@ -735,7 +593,7 @@
   </div>
 </section>
 
-<!-- ============ 业务底盘（可编辑） ============ -->
+<!-- ============ 06 / 业务底盘 ============ -->
 <section id="foundation">
   <div class="wrap">
     <div class="eyebrow">Track Record</div>
@@ -756,25 +614,6 @@
   </div>
 </section>
 
-<!-- ============ 对外固定链接（锁定不可编辑） ============ -->
-<section id="external" style="background:var(--bg-soft)">
-  <div class="wrap">
-    <div class="eyebrow">Live Portfolio</div>
-    <h2>对外链接</h2>
-    <p class="sub">完整作品集与持续更新内容，请访问以下固定链接（对外发布，内容不可编辑）。</p>
-    <!-- 锁定：对外固定链接，不可编辑 -->
-    <div class="locked-card">
-      <div>
-        <div class="lbl">PUBLISHED LINK · 已发布</div>
-        <div class="url">https://506675124-chen.github.io/chenwanjun-ai-portfolio/</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <span class="lock">🔒 链接已锁定</span>
-        <a class="btn" href="https://506675124-chen.github.io/chenwanjun-ai-portfolio/" style="background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600">访问作品集 →</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">© 陈婉君 · AI 产品作品集 · 对外发布版本，内容不可编辑</div>
