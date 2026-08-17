@@ -1,6 +1,6 @@
 import re
 
-src = r"C:\Users\点拨\Desktop\常用模板\陈婉君\陈婉君_AI作品集_编辑版.html"
+src = r"D:\1\香港四大实习2027\portfolio_deploy\user_base.html"
 out = r"D:\1\香港四大实习2027\portfolio_deploy\index.html"
 
 with open(src, encoding="utf-8") as f:

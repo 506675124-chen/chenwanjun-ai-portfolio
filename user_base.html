@@ -2,7 +2,7 @@
 <html lang="zh-CN"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>陈婉君 · 作品集</title>
+<title>陈婉君 · AI 产品作品集</title>
 <style>
   :root{
     --navy:#1f2a44;
@@ -26,10 +26,10 @@
     color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;
   }
   a{color:var(--teal);text-decoration:none}
-
-  []{transition:outline .15s}
-  []:hover{outline:1px dashed #cfd8e3;outline-offset:6px;border-radius:6px}
-  []:focus{outline:2px dashed var(--teal);outline-offset:6px;border-radius:6px;background:#fcfffe}
+  /* 可编辑区块：平时干净，点击编辑时显示虚线提示 */
+  [contenteditable="true"]{transition:outline .15s}
+  [contenteditable="true"]:hover{outline:1px dashed #cfd8e3;outline-offset:6px;border-radius:6px}
+  [contenteditable="true"]:focus{outline:2px dashed var(--teal);outline-offset:6px;border-radius:6px;background:#fcfffe}
 
   /* 顶部导航 */
   nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
@@ -127,7 +127,11 @@
   .shot{margin-top:18px;border:1.5px dashed #cdd6e2;border-radius:10px;padding:18px;text-align:center;color:var(--muted);font-size:13px;background:#fbfcfd;position:relative;min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;overflow:hidden}
   .shot img,.shot video{max-width:100%;height:auto;border-radius:8px;display:block}
   .shot.has-media{border-style:solid;background:#fff;padding:10px}
-  .shot:hover
+  .shot-actions{position:absolute;inset:0;background:rgba(255,255,255,.88);display:flex;align-items:center;justify-content:center;gap:10px;opacity:0;transition:opacity .18s;pointer-events:none}
+  .shot:hover .shot-actions{opacity:1;pointer-events:auto}
+  .shot-btn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:12px;color:var(--navy);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:background .12s,border-color .12s}
+  .shot-btn:hover{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}
+  .shot.dragover{border-color:var(--teal);background:var(--teal-soft)}
 
   /* 竞品对比 */
   .compare{width:100%;border-collapse:collapse;font-size:14px;margin:24px 0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
@@ -169,6 +173,23 @@
     .proj-header{flex-direction:column}
     nav .links{display:none}
   }
+
+  /* 对内编辑工具条：右下角悬浮小圆点，默认极简，点击展开 */
+  #editbar{position:fixed;right:20px;bottom:20px;z-index:50;font-family:inherit}
+  .eb-fab{width:44px;height:44px;border-radius:50%;background:rgba(31,42,68,.82);color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.18);backdrop-filter:blur(6px);transition:transform .15s,background .15s}
+  .eb-fab:hover{transform:scale(1.08);background:rgba(31,42,68,.95)}
+  .eb-panel{position:absolute;right:0;bottom:58px;width:240px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.14);padding:14px;display:none;flex-direction:column;gap:10px}
+  .eb-panel.open{display:flex}
+  .eb-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;color:var(--muted)}
+  .eb-head button{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;padding:0 2px}
+  .eb-head button:hover{color:var(--navy)}
+  .eb-btns{display:flex;flex-wrap:wrap;gap:8px}
+  .eb-btn{background:#f6f8fb;color:var(--navy);border:1px solid var(--line);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:background .12s}
+  .eb-btn:hover{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}
+  .eb-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .eb-btn.primary:hover{background:#0c8276}
+  .eb-status{color:var(--muted);font-size:11px;text-align:center;padding-top:4px}
+  body.editing [contenteditable]{outline:2px dashed #0f9b8e;outline-offset:6px;border-radius:6px;background:#fcfffe}
 </style>
 
 </head>
@@ -189,13 +210,29 @@
   </div>
 </nav>
 
+<div id="editbar">
+  <div class="eb-panel open" id="ebPanel">
+    <div class="eb-head"><span>✏️ 对内编辑（不对外）</span><button id="ebClose" title="收起">×</button></div>
+    <div class="eb-btns">
+      <button id="btnEdit" class="eb-btn primary">编辑</button>
+      <button id="btnSave" class="eb-btn">保存我的版本</button>
+      <button id="btnRestore" class="eb-btn">导入我的版本</button>
+      <button id="btnExport" class="eb-btn">导出 HTML</button>
+      <button id="btnPreview" class="eb-btn">预览</button>
+    </div>
+    <div id="ebStatus" class="eb-status">预览模式</div>
+  </div>
+  <button class="eb-fab" id="ebFab" title="对内编辑">✏️</button>
+</div>
+
+
 <!-- ============ Hero / 自我介绍（可编辑） ============ -->
 <header class="hero">
   <div class="wrap">
-    <h1>陈婉君（Winnie）</h1>
-    <div class="role">AI 产品/留学规划顾问 / 主导师</div>
-    <div class="tagline">从一线业务痛点出发，把留学顾问的经验沉淀为可运行的 AI 工作流与知识库产品。擅长把模糊的业务诉求，翻译成清晰的 AI 产品需求、用例与评测标准。</div>
-    <div class="contact">
+    <h1 contenteditable="false">陈婉君（Winnie）</h1>
+    <div class="role" contenteditable="false">AI 产品/留学规划顾问 / 主导师</div>
+    <div class="tagline" contenteditable="false">从一线业务痛点出发，把留学顾问的经验沉淀为可运行的 AI 工作流与知识库产品。擅长把模糊的业务诉求，翻译成清晰的 AI 产品需求、用例与评测标准。</div>
+    <div class="contact" contenteditable="false">
       <span>📍 深圳</span>
       <span>✉ 邮箱：evaandwinnie@163.com</span>
       <span>🔗 微信：xfx_ly</span>
@@ -209,9 +246,9 @@
 <section id="intro">
   <div class="wrap">
     <div class="eyebrow">About</div>
-    <h2>自我介绍</h2>
-    <p class="sub">从一线业务出发，先框定问题，再让 AI 跑起来。</p>
-    <div style="font-size:15.5px;color:var(--ink)">
+    <h2 contenteditable="false">自我介绍</h2>
+    <p class="sub" contenteditable="false">从一线业务出发，先框定问题，再让 AI 跑起来。</p>
+    <div contenteditable="false" style="font-size:15.5px;color:var(--ink)">
       <p style="margin-bottom:14px">我是陈婉君，常驻深圳。过去几年我在留学咨询一线，完整负责本升硕全周期服务——从选校策略、背景规划、文书打磨到录取后流程。这段经历让我养成了一种习惯：<b>先把问题框清楚，再动手做东西</b>。</p>
       <p style="margin-bottom:14px">近一年，我把这套习惯用到了 AI 上。我主导搭建了一个自然语言驱动的个人工作台，把顾问经验沉淀成可复用的规则与用例；也独立完成了一个含 <span class="metric-inline">11,284 条</span> 结构化学位数据的全球院校库，并把它部署进生产环境。我没有计算机科班背景，但我相信——<b>非硬核，也能把 AI 真正用起来</b>。</p>
       <p>意向岗位：AI 知识库 / RAG 产品设计/AI 产品运营/Agent 产品运营/AI Business Analyst ，希望把「业务翻译 + 产品落地 + 效果评测」的能力，带到更体系的 AI 团队里。</p>
@@ -223,15 +260,15 @@
 <section id="context" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="eyebrow">01 / Problem &amp; Goals</div>
-    <h2>为什么需要新系统？<span class="en">Why AI-Native Workflow?</span></h2>
-    <p class="sub">传统留学服务依赖多工具、多角色与大量人工沟通，信息在交接过程中持续损耗。我的一线痛点决定了这套系统要解决什么问题。</p>
+    <h2 contenteditable="false">为什么需要新系统？<span class="en" contenteditable="false">Why AI-Native Workflow?</span></h2>
+    <p class="sub" contenteditable="false">传统留学服务依赖多工具、多角色与大量人工沟通，信息在交接过程中持续损耗。我的一线痛点决定了这套系统要解决什么问题。</p>
 
-    <div class="big-card">
+    <div class="big-card" contenteditable="false">
       <h3>不是再做一个后台，而是重构留学服务的交付方式。</h3>
       <p>公司在用简道云系统，但选校模块基本弃置、简历无法联动、整体利用率很低。大多数时间我仍在 Excel 和学校官网之间反复横跳。签证/行前部分完全没有支持文件和数据，只能靠自己整理。AI 不该只是搜索或写作工具，它应该成为贯穿学生服务全周期的协作能力。</p>
     </div>
 
-    <div class="card-grid">
+    <div class="card-grid" contenteditable="false">
       <div class="card">
         <div class="num">01 / TOOL FRAGMENTATION</div>
         <h4>工具割裂</h4>
@@ -254,7 +291,7 @@
       </div>
     </div>
 
-    <div class="framework" style="margin-top:28px">
+    <div class="framework" style="margin-top:28px" contenteditable="false">
       <h4>What Good Looks Like · 成功框架</h4>
       <div class="fw-item"><div class="fw-dot"></div><div><b>Single Source of Truth：</b>学生档案、申请状态、院校数据统一维护，避免多份 Excel 互相打架。</div></div>
       <div class="fw-item"><div class="fw-dot"></div><div><b>Observable AI：</b>AI 给出结果时，必须同时呈现依据、置信度和可干预入口，而不是黑盒输出。</div></div>
@@ -268,10 +305,10 @@
 <section id="system">
   <div class="wrap">
     <div class="eyebrow">02 / System Design</div>
-    <h2>AI 工作台：一条统一的学生服务主线。<span class="en">One System. Multiple Roles. Visible AI.</span></h2>
-    <p class="sub">围绕统一学生主线，为不同角色提供与任务相关的工作台；AI 不是额外工具，而是嵌入主线的协作能力。</p>
+    <h2 contenteditable="false">AI 工作台：一条统一的学生服务主线。<span class="en" contenteditable="false">One System. Multiple Roles. Visible AI.</span></h2>
+    <p class="sub" contenteditable="false">围绕统一学生主线，为不同角色提供与任务相关的工作台；AI 不是额外工具，而是嵌入主线的协作能力。</p>
 
-    <div class="ecosystem">
+    <div class="ecosystem" contenteditable="false">
       <div class="eco-core">
         <div class="en">UNIFIED STUDENT CORE</div>
         <div class="cn">统一学生主线</div>
@@ -286,7 +323,7 @@
       </div>
     </div>
 
-    <div class="flow" style="margin:28px 0">
+    <div class="flow" style="margin:28px 0" contenteditable="false">
       <div class="flow-step"><div class="no">01</div><div class="ttl">需求沟通</div><div class="sub2">Consult</div></div>
       <div class="flow-step"><div class="no">02</div><div class="ttl">背景评估</div><div class="sub2">Assess</div></div>
       <div class="flow-step"><div class="no">03</div><div class="ttl">选校定校</div><div class="sub2">Match</div></div>
@@ -296,7 +333,7 @@
       <div class="flow-step"><div class="no">07</div><div class="ttl">签证/行前</div><div class="sub2">Depart</div></div>
     </div>
 
-    <div class="card-grid">
+    <div class="card-grid" contenteditable="false">
       <div class="card">
         <div class="num">INFORMATION ARCHITECTURE</div>
         <h4>View × Action × Data</h4>
@@ -309,7 +346,7 @@
       </div>
     </div>
 
-    <div class="framework" style="margin-top:22px">
+    <div class="framework" style="margin-top:22px" contenteditable="false">
       <h4>核心设计原则</h4>
       <div class="fw-item"><div class="fw-dot"></div><div><b>Human sets the goal. AI accelerates the work.</b> 顾问设定目标，AI 负责信息检索、初筛与格式化，最终判断权始终在人。</div></div>
       <div class="fw-item"><div class="fw-dot"></div><div><b>Every handoff carries context.</b> 每次角色交接都保留学生背景、当前状态、责任人与交付物，避免团队重新理解学生。</div></div>
@@ -322,11 +359,11 @@
 <section id="projects">
   <div class="wrap">
     <div class="eyebrow">08 / Selected Work</div>
-    <h2>作品展示</h2>
-    <p class="sub">每个项目按「用户问题 → 可运行工作流 → AI 策略 → 评测证据 → 迭代与风险」五层展开。数字不是装饰，它说明我怎样判断「够不够好」。</p>
+    <h2 contenteditable="false">作品展示</h2>
+    <p class="sub" contenteditable="false">每个项目按「用户问题 → 可运行工作流 → AI 策略 → 评测证据 → 迭代与风险」五层展开。数字不是装饰，它说明我怎样判断「够不够好」。</p>
 
     <!-- 项目一：AI 驱动留学工作台 -->
-    <div class="proj">
+    <div class="proj" contenteditable="false">
       <div class="proj-header">
         <div class="idx">1</div>
         <div>
@@ -400,11 +437,11 @@
         <p>上传学生素材 → AI 按目标专业风格生成文书初稿框架 → 顾问精修定稿，全程保留「去 AI 化」人设。文书产出提速，风格可控、不模板腔，契合咨询行业对真实性与个性化的要求。</p>
       </div>
 
-      <div class="shot">📷 截图位：工作台录屏 demo（建议 1–2 分钟，展示「自然语言指令 → 自动建档 / 生成选校梯队 / 输出时间表」）</div>
+      <div class="shot" data-upload-ready="1" data-placeholder="📷 截图位：工作台录屏 demo（建议 1–2 分钟，展示「自然语言指令 → 自动建档 / 生成选校梯队 / 输出时间表」）">📷 截图位：工作台录屏 demo（建议 1–2 分钟，展示「自然语言指令 → 自动建档 / 生成选校梯队 / 输出时间表」）<input type="file" accept="image/*,video/*" style="display: none;"><div class="shot-actions"><button class="shot-btn" type="button">📎 上传图片/视频</button><button class="shot-btn shot-remove" type="button">🗑 移除</button></div></div>
     </div>
 
     <!-- 项目二：全球硕士院校库 -->
-    <div class="proj">
+    <div class="proj" contenteditable="false">
       <div class="proj-header">
         <div class="idx">2</div>
         <div>
@@ -434,11 +471,11 @@
           <div class="story-body"><b>迭代与风险</b><p><b>下一步：</b>增加更新频率与变更追踪，让院校信息时效性可感知。<b>误判控制：</b>上线前验收 + 生产 v9 灰度使用；跨校区项目曾因合并错误，已加「学校 + 校区」联合主键。</p></div>
         </div>
       </div>
-      <div class="shot">📷 截图位：院校库检索 / 数据看板 / pipeline 运行截图</div>
+      <div class="shot" data-upload-ready="1" data-placeholder="📷 截图位：院校库检索 / 数据看板 / pipeline 运行截图">📷 截图位：院校库检索 / 数据看板 / pipeline 运行截图<input type="file" accept="image/*,video/*" style="display: none;"><div class="shot-actions"><button class="shot-btn" type="button">📎 上传图片/视频</button><button class="shot-btn shot-remove" type="button">🗑 移除</button></div></div>
     </div>
 
     <!-- 项目三：四年规划生成器 -->
-    <div class="proj">
+    <div class="proj" contenteditable="false">
       <div class="proj-header">
         <div class="idx">3</div>
         <div>
@@ -468,7 +505,7 @@
           <div class="story-body"><b>迭代与风险</b><p><b>下一步：</b>从规则引擎升级为学生可对话追问的 Agent，支持动态调整。<b>误判控制：</b>截止日期二次确认；学生目标等敏感信息本地存储。</p></div>
         </div>
       </div>
-      <div class="shot">📷 截图位：生成器输入输出示例 / 规划表截图</div>
+      <div class="shot" data-upload-ready="1" data-placeholder="📷 截图位：生成器输入输出示例 / 规划表截图">📷 截图位：生成器输入输出示例 / 规划表截图<input type="file" accept="image/*,video/*" style="display: none;"><div class="shot-actions"><button class="shot-btn" type="button">📎 上传图片/视频</button><button class="shot-btn shot-remove" type="button">🗑 移除</button></div></div>
     </div>
   </div>
 </section>
@@ -477,15 +514,15 @@
 <section id="research" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="eyebrow">09 / Competitive Research</div>
-    <h2>竞品与市场验证：申学邦<span class="en">Proving the Problem is Real.</span></h2>
-    <p class="sub">我的方案不是闭门造车。完成工作台后，我对市面上主流的留学智能管理 SaaS「申学邦」做了市场调研，验证痛点与机会。</p>
+    <h2 contenteditable="false">竞品与市场验证：申学邦<span class="en" contenteditable="false">Proving the Problem is Real.</span></h2>
+    <p class="sub" contenteditable="false">我的方案不是闭门造车。完成工作台后，我对市面上主流的留学智能管理 SaaS「申学邦」做了市场调研，验证痛点与机会。</p>
 
-    <div class="card" style="margin-bottom:22px">
+    <div class="card" style="margin-bottom:22px" contenteditable="false">
       <div class="num">BACKGROUND</div>
       <p>申学邦是一份面向留学机构的智能管理 SaaS 解决方案。其方案指出：留学行业近 <b>90%</b> 的机构未采用数字化系统，原因包括无对口产品、成本开销大、研发难度高。申学邦提供查校版（<b>6,000 元/年</b>）、CRM 版（6,000 元/年）、服务管理版（8,000 元/年）、全流程版（<b>16,000 元/年</b>）等套餐，覆盖招生、规划、院校、文书、申请、签证等模块。</p>
     </div>
 
-    <table class="compare">
+    <table class="compare" contenteditable="false">
       <tbody><tr><th style="width:22%">维度</th><th style="width:39%">申学邦</th><th style="width:39%">我的方案</th></tr>
       <tr><td><b>目标用户</b></td><td>中小型留学机构 / 企业级部署</td><td class="highlight">顾问个人 / 小团队效率提升</td></tr>
       <tr><td><b>选校能力</b></td><td>智能选校、大学库、专业库、录取案例库</td><td class="highlight">自建 11,284 条院校库 + 自然语言选校指令</td></tr>
@@ -497,7 +534,7 @@
       <tr><td><b>适用结论</b></td><td>功能全但重，适合机构数字化改造</td><td class="highlight">轻量、按需拼装，个人效率提升已足够</td></tr>
     </tbody></table>
 
-    <div class="framework">
+    <div class="framework" contenteditable="false">
       <h4>验证结论</h4>
       <div class="fw-item"><div class="fw-dot"></div><div><b>问题真实存在：</b>申学邦的行业分析证实，留学服务数字化程度低、信息碎片化是普遍痛点。</div></div>
       <div class="fw-item"><div class="fw-dot"></div><div><b>我的方案有差异化：</b>不追求大而全的机构级 SaaS，而是聚焦顾问每日最高频的「选校 + 时间表 + 签证/行前」三个动作，用自然语言把工作流压缩到分钟级。</div></div>
@@ -510,9 +547,9 @@
 <section id="capability" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="eyebrow">Capability Map</div>
-    <h2>能力地图</h2>
-    <p class="sub">我做过的事 → 对应的 AI 能力 → 参考项目。</p>
-    <div class="cap-grid">
+    <h2 contenteditable="false">能力地图</h2>
+    <p class="sub" contenteditable="false">我做过的事 → 对应的 AI 能力 → 参考项目。</p>
+    <div class="cap-grid" contenteditable="false">
       <div class="cap-row">
         <div><span class="h">我做过的事</span><span class="v">搭建含 11,284 条结构化学位数据的院校库，定义字段规范与可信来源标准</span></div>
         <div><span class="h">对应 AI 能力</span><div><span class="cap-tag">知识工程</span><span class="cap-tag">RAG 知识库</span><span class="cap-tag">信源治理</span></div></div>
@@ -541,15 +578,15 @@
 <section id="foundation">
   <div class="wrap">
     <div class="eyebrow">Track Record</div>
-    <h2>业务底盘</h2>
-    <p class="sub">一线业务沉淀的可量化结果，作为能力可信度背书。</p>
-    <div class="metrics">
+    <h2 contenteditable="false">业务底盘</h2>
+    <p class="sub" contenteditable="false">一线业务沉淀的可量化结果，作为能力可信度背书。</p>
+    <div class="metrics" contenteditable="false">
       <div class="metric"><div class="num">98%</div><div class="lbl">录取率</div></div>
       <div class="metric"><div class="num">20w+</div><div class="lbl">月流水（元）</div></div>
       <div class="metric"><div class="num">600+</div><div class="lbl">线下宣讲人次</div></div>
       <div class="metric"><div class="num">8校6机构</div><div class="lbl">合作资源</div></div>
     </div>
-    <ul class="cred">
+    <ul class="cred" contenteditable="false">
       <li><b>5 年</b> 留学全周期服务经验（咨询 → 规划 → 申请 → 签证）</li>
       <li><b>商务拓展：</b>拓展 8 所院校、6 家机构合作；独立运营社群与线下宣讲</li>
       <li><b>工具链：</b>Excel / SQL / Python（数据处理与自动化）+ AI 工具链</li>
@@ -559,28 +596,174 @@
 </section>
 
 
-<!-- ============ 对外链接 ============ -->
-<section id="external">
-  <div class="wrap">
-    <div class="eyebrow">Public Link</div>
-    <h2>对外链接</h2>
-    <p class="sub">这是可发送给 HR / 面试官的固定对外链接，内容随作品集更新而更新。</p>
-    <div class="locked-card">
-      <div>
-        <div class="lbl">AI 作品集 · 对外展示</div>
-        <div class="url">https://506675124-chen.github.io/chenwanjun-ai-portfolio/</div>
-      </div>
-      <div class="lock">🔒 只读 · 不可编辑</div>
-    </div>
-  </div>
-</section>
-
 <footer>
-  <div class="wrap">© 陈婉君 · 作品集</div>
+  <div class="wrap">© 陈婉君 · AI 产品作品集</div>
 </footer>
 
 
+<script>
+(function(){
+  const btnEdit = document.getElementById('btnEdit');
+  const btnSave = document.getElementById('btnSave');
+  const btnRestore = document.getElementById('btnRestore');
+  const btnExport = document.getElementById('btnExport');
+  const btnPreview = document.getElementById('btnPreview');
+  const status = document.getElementById('ebStatus');
+  const ebFab = document.getElementById('ebFab');
+  const ebPanel = document.getElementById('ebPanel');
+  const ebClose = document.getElementById('ebClose');
+  const KEY = 'portfolio_draft_v2';
+  let editing = false;
 
+  function setEdit(on){
+    editing = on;
+    document.querySelectorAll('[contenteditable]').forEach(function(el){
+      el.contentEditable = on ? 'true' : 'false';
+    });
+    document.body.classList.toggle('editing', on);
+    btnEdit.textContent = on ? '完成编辑' : '编辑';
+    status.textContent = on ? '编辑中…（点区域即可改）' : '预览模式';
+  }
+
+  function openPanel(){ ebPanel.classList.add('open'); }
+  function closePanel(){ ebPanel.classList.remove('open'); }
+
+  ebFab.onclick = function(e){ e.stopPropagation(); ebPanel.classList.toggle('open'); };
+  ebClose.onclick = function(e){ e.stopPropagation(); closePanel(); };
+  ebPanel.onclick = function(e){ e.stopPropagation(); };
+  document.addEventListener('click', function(){ if(ebPanel.classList.contains('open')) closePanel(); });
+
+  btnEdit.onclick = function(){ setEdit(!editing); };
+
+  btnSave.onclick = function(){
+    // 改为下载真实文件，不依赖浏览器 localStorage（本地文件常被禁用）
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '陈婉君_AI作品集_我的版本.html';
+    a.click();
+    status.textContent = '已保存为文件 ✓ 请保留下载的「我的版本.html」';
+  };
+
+  btnRestore.onclick = function(){
+    // 改为导入之前下载的「我的版本.html」文件
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.html,text/html';
+    input.onchange = function(){
+      const f = input.files && input.files[0];
+      if(!f) return;
+      const reader = new FileReader();
+      reader.onload = function(e){
+        document.open();
+        document.write(e.target.result);
+        document.close();
+      };
+      reader.readAsText(f);
+    };
+    input.click();
+  };
+
+  btnPreview.onclick = function(){
+    setEdit(false);
+    const html = '<!DOCTYPE html>' + document.documentElement.outerHTML;
+    const w = window.open('', '_blank');
+    w.document.write(html);
+    w.document.close();
+  };
+
+  btnExport.onclick = function(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
+    clone.querySelectorAll('script').forEach(function(el){ el.remove(); });
+    clone.querySelectorAll('.shot-actions, .shot input[type="file"]').forEach(function(el){ el.remove(); });
+    clone.querySelectorAll('.shot').forEach(function(el){ el.removeAttribute('data-upload-ready'); el.removeAttribute('data-placeholder'); });
+    const bar = clone.querySelector('#editbar'); if(bar) bar.remove();
+    const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '陈婉君_AI作品集_对外版.html';
+    a.click();
+    status.textContent = '已导出纯展示版 HTML ✓（可交给我部署）';
+  };
+
+  // 截图/视频上传支持
+  (function(){
+    function initShot(shot){
+      if(shot.dataset.uploadReady) return;
+      shot.dataset.uploadReady = '1';
+      if(!shot.dataset.placeholder) shot.dataset.placeholder = shot.textContent.trim();
+
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*,video/*';
+      input.style.display = 'none';
+      shot.appendChild(input);
+
+      const actions = document.createElement('div');
+      actions.className = 'shot-actions';
+      actions.innerHTML = '<button class="shot-btn" type="button">📎 上传图片/视频</button><button class="shot-btn shot-remove" type="button">🗑 移除</button>';
+      shot.appendChild(actions);
+
+      const uploadBtn = actions.querySelector('.shot-btn:not(.shot-remove)');
+      const removeBtn = actions.querySelector('.shot-remove');
+
+      function handleFile(file){
+        if(!file) return;
+        if(!file.type.startsWith('image/') && !file.type.startsWith('video/')){
+          alert('请上传图片或视频文件');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e){
+          const url = e.target.result;
+          let media;
+          if(file.type.startsWith('video/')){
+            media = document.createElement('video');
+            media.controls = true;
+            media.src = url;
+          } else {
+            media = document.createElement('img');
+            media.src = url;
+          }
+          shot.innerHTML = '';
+          shot.classList.add('has-media');
+          shot.appendChild(media);
+          initShot(shot);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      uploadBtn.onclick = function(e){ e.stopPropagation(); input.click(); };
+      removeBtn.onclick = function(e){
+        e.stopPropagation();
+        shot.innerHTML = '';
+        shot.classList.remove('has-media');
+        shot.textContent = shot.dataset.placeholder || '📷 截图位';
+        initShot(shot);
+      };
+      input.onchange = function(){ if(input.files && input.files[0]) handleFile(input.files[0]); };
+
+      shot.addEventListener('dragover', function(e){ e.preventDefault(); shot.classList.add('dragover'); });
+      shot.addEventListener('dragleave', function(){ shot.classList.remove('dragover'); });
+      shot.addEventListener('drop', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        shot.classList.remove('dragover');
+        handleFile(e.dataTransfer.files[0]);
+      });
+      shot.addEventListener('click', function(e){
+        if(!shot.querySelector('img, video') && e.target === shot) input.click();
+      });
+    }
+    document.querySelectorAll('.shot').forEach(initShot);
+  })();
+
+  setEdit(false);
+})();
+</script>
 
 
 
